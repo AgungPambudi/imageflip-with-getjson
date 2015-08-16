@@ -1,0 +1,106 @@
+<!--
+Name:   SOAP Webservice
+Author: Agung Pambudi
+URL 1:  http://about.agungpambudi.com/
+URL 2:  https://github.com/AgungPambudi
+Date:   November 2014
+License:  This free template is licensed under the Creative Commons Attribution 3.0 License, which permits both personal and commercial use. However, to satisfy the 'attribution' clause of the license, you are required to keep the footer links intact which provides due credit to its authors. For more specific details about the license, you may visit the URL below:
+http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imageflip Example</title>
+<link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/jquery.mobile-1.2.0.min.js"></script>
+<script src="js/imageflip.mini.js"></script>
+<style type="text/css">
+#iGallery		{list-style:none; padding:0px; margin:0px}
+#iGallery li	{list-style:none; padding:2px; margin:2px; float:left}
+
+/* imageflip CSS. Copy & Paste this to your CSS file */
+#imageflippage	{background-color:#000; margin:0px; padding:0px; border:none; height:100%; width:100%}
+#tadcontent		{padding:0px; margin:0px; position:relative; background:#000; height:100%; width:100%;}
+#imageflipimg	{vertical-align:middle; height:100%; width:100%; z-index:98; background-position:center; background-size:contain; text-align:center; background-repeat:no-repeat }
+#imagefliper	{width:100%; top:45px; bottom:0px; position:absolute; z-index:99}
+#tadnavi		{position:fixed; top:0px; z-index:100; width:100%; opacity:0.7; display:none }
+#tadinfo		{position:fixed; display:none; bottom:0px; width:100%; padding:5px; background-color:#333333; opacity:0.7; color:#FFFFFF; text-align:center; font-size:small; font-family:Verdana, Geneva, sans-serif}
+
+
+.localnav {
+	margin:0 0 20px 0;
+}
+.ui-mobile-viewport .localnav li {
+	float:left;
+}
+
+.ui-mobile-viewport .localnav li {
+	border: none;	
+}
+
+
+
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	
+	function loadImages (url, container){
+  // get the JSON object
+	  $.getJSON(url, function(data){
+	   if(typeof data === 'object'){
+	     // create the HTML markup for the slider from data
+	      $.each(data['1'], function(key, image){
+	        var slide = '<li><a title="'+image['title']+'" href="'+image['url']+'"><img src="'+image['url']+'" style="width:100px; height:100px; display:inline-block; border:1px solid #303030; box-shadow:0 1px 3px rgba(0,0,0,0.5); border-radius:4px; margin: 6px 5px 30px; position:relative; text-decoration:none; background-position:center center; background-repeat: no-repeat; background-size:cover; -moz-background-size:cover; -webkit-background-size:cover;" /></a></li>';
+	        $(container).append(slide);
+	      });
+	     // initialize anythingSlider
+	      $(container).imageflip();
+	    }
+	  });
+	};
+	
+	$(function(){
+	  loadImages('images.json', '#iGallery');
+	});
+	
+})
+</script>
+</head>
+<body>
+
+<div data-role="page" id="home" data-theme="c" data-title="imageFlip Demo">
+	<div data-role="header" data-theme="d" id="header"><h1>Example</h1></div>
+	<div data-role="content" id="content">
+		<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			<li><a href="#" data-role="button" data-transition="fade" class="ui-btn-active">1</a></li>
+			<li><a href="#" data-role="button" data-transition="fade">2</a></li>
+			<li><a href="#" data-role="button" data-transition="fade">3</a></li>
+			<li><a href="#" data-role="button" data-transition="fade">&#187;</a></li>
+		</ul>
+		<div class="content-primary">	
+			<ul id="iGallery" class="paginate"></ul>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="home" data-theme="c" data-title="imageFlip Demo">
+	<div data-role="header" data-theme="d" id="header"><h1>Example</h1></div>
+	<div data-role="content" id="content">
+		<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			<li><a href="#" data-role="button" data-transition="fade" class="ui-btn-active">1</a></li>
+			<li><a href="#" data-role="button" data-transition="fade">2</a></li>
+			<li><a href="#" data-role="button" data-transition="fade">3</a></li>
+			<li><a href="#" data-role="button" data-transition="fade">&#187;</a></li>
+		</ul>
+		<div class="content-primary">	
+			<ul id="iGallery" class="paginate"></ul>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
